@@ -36,7 +36,8 @@ Object.freeze(edges); // Freeze the map itself
 ``` 
 ### make a function `simple_delete_node(child)`
 1. child must not be root
-2. child must already be in the nodes
+2. is idiom potent -- can delete notes that don't pre-exist
+
 3. child must not have children
 4. child is no longer in nodes
 

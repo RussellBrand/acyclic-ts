@@ -25,14 +25,17 @@ export function parents(node: Node, tree: Tree): Node[] {
 /***
  * make_tree does no validation of the input. It is the responsibility of the caller to ensure that the input is valid.
  * ***/
-export function make_tree(root: Node, list_parent_child: [Node, Node][]): Tree {
+export function make_tree(
+  nodes: Node[],
+  list_parent_child: [Node, Node][]
+): Tree {
   const edges = new Map<Node, Node[]>();
-  edges.set(root, []);
-  //   for (const node of nodes) {
-  //     if (!edges.has(node)) {
-  //       edges.set(node, []);
-  //     }
-  //   }
+  //   edges.set(root, []);
+  for (const node of nodes) {
+    if (!edges.has(node)) {
+      edges.set(node, []);
+    }
+  }
 
   for (const [from, to] of list_parent_child) {
     if (!edges.has(from)) {
@@ -65,4 +68,19 @@ export function isValid(tree: Tree): boolean {
 }
 export function tree_nodes(tree: Tree): Node[] {
   return Array.from(tree.keys());
+}
+
+export function simple_delete_node(tree: Tree, node: Node): void {
+  if (node === root(tree)) {
+    throw new Error("Cannot delete root node");
+  }
+  if (!tree.has(node)) {
+    return;
+  }
+  const children = tree.get(node);
+  if (children) {
+    throw new Error("Cannot delete node with children");
+  }
+  throw "Not implemented";
+  //   tree.delete(node);
 }
