@@ -68,7 +68,42 @@ Constrait based -- can be used with D3.
 
 ### look at libraries that are commonly used with react
 
-From ChatGPT 4.0
+Looking for recommendations for React Library for Graph Layout
+
+I have parent-child heirarchy as a general graph (cylces, multiple roots).
+
+Generally about five "roots" roots, two "unhappy" root with most notes being a descendent of one type of rule or the other rather than both.
+
+Two types of non-root nodes.
+
+About 150 nodes total.
+
+There are two basic type of non-root nodes.
+
+The nodes need display short text and have distinguishable visuals based on their properties.
+
+Want to constrain the position of root nodes and have good automatic layout of the rest.
+
+User will need to edit the graph (create & destroy nodes & links, change source/destination of links) and manually redisplay.
+
+What library is best for building this in React?
+
+So far I am looking at 
+
+* Nivo
+
+* React-Flow
+
+* Reaflow
+
+* Reagraph
+
+* Visx
+
+But not committed to using one of them.
+
+
+Notes From ChatGPT 4.0
 
 #### Reaflow
 
