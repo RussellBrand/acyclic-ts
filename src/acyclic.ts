@@ -2,17 +2,17 @@
  * Constructs a graph (or forest) using the provided nodes and edges.
  
  */
-export type Node = string;
-export type EdgeGroup = [Node, Node[]];
+export type NodeName = string;
+export type EdgeGroup = [NodeName, NodeName[]];
 
-export type Tree = Map<Node, Node[]>;
+export type Tree = Map<NodeName, NodeName[]>;
 
-export function edge_group_children(edge_group: EdgeGroup): Node[] {
+export function edge_group_children(edge_group: EdgeGroup): NodeName[] {
   const [_parent, children] = edge_group;
   return children;
 }
 
-export function parents(node: Node, tree: Tree): Node[] {
+export function parents(node: NodeName, tree: Tree): NodeName[] {
   const parents = [];
   for (const [parent, children] of tree) {
     if (children.includes(node)) {
@@ -22,7 +22,7 @@ export function parents(node: Node, tree: Tree): Node[] {
   return parents;
 }
 
-export function children(node: Node, tree: Tree): Node[] {
+export function children(node: NodeName, tree: Tree): NodeName[] {
   return tree.get(node) || [];
 }
 
@@ -30,10 +30,10 @@ export function children(node: Node, tree: Tree): Node[] {
  * make_tree does no validation of the input. It is the responsibility of the caller to ensure that the input is valid.
  * ***/
 export function make_tree(
-  nodes: Node[],
-  list_parent_child: [Node, Node][]
+  nodes: NodeName[],
+  list_parent_child: [NodeName, NodeName][]
 ): Tree {
-  const edges = new Map<Node, Node[]>();
+  const edges = new Map<NodeName, NodeName[]>();
   //   edges.set(root, []);
   for (const node of nodes) {
     if (!edges.has(node)) {
@@ -51,7 +51,7 @@ export function make_tree(
   return edges;
 }
 
-export function root(tree: Tree): Node {
+export function root(tree: Tree): NodeName {
   for (const [node, _] of tree) {
     return node;
   }
@@ -70,15 +70,15 @@ export function isValid(tree: Tree): boolean {
 
   return true;
 }
-export function tree_nodes(tree: Tree): Node[] {
+export function tree_nodes(tree: Tree): NodeName[] {
   return Array.from(tree.keys());
 }
 
-export function has_node(tree: Tree, node: Node): boolean {
+export function has_node(tree: Tree, node: NodeName): boolean {
   return tree.has(node);
 }
 
-export function simple_delete_node(tree: Tree, node: Node): void {
+export function simple_delete_node(tree: Tree, node: NodeName): void {
   // console.log(tree);
   // console.log(node);
   if (node === root(tree)) {
@@ -101,8 +101,8 @@ export function simple_delete_node(tree: Tree, node: Node): void {
 
 export function add_node(
   tree: Tree,
-  node: Node,
-  my_parent: Node | undefined = undefined
+  node: NodeName,
+  my_parent: NodeName | undefined = undefined
 ): void {
   const my_root = root(tree);
   if (my_parent === undefined) {
