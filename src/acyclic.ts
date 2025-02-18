@@ -4,11 +4,12 @@
  */
 export type Node = string;
 
-export type Edges = Map<Node, Node[]>;
+// export type Edges = Map<Node, Node[]>;
+export type Tree = Map<Node, Node[]>;
 
-export type Tree = {
-  edges: Edges; // potentially confusing that edges.size is the number of nodes in the graph, not the number of edges
-};
+// export type Tree = {
+//   edges: Edges; // potentially confusing that edges.size is the number of nodes in the graph, not the number of edges
+// };
 
 /***
  * make_tree does no validation of the input. It is the responsibility of the caller to ensure that the input is valid.
@@ -29,11 +30,11 @@ export function make_tree(nodes: Node[], connections: [Node, Node][]): Tree {
     edges.get(from)?.push(to);
   }
 
-  return { edges };
+  return edges;
 }
 
 export function root(tree: Tree): Node {
-  for (const [node, _] of tree.edges) {
+  for (const [node, _] of tree) {
     return node;
   }
   throw new Error("No root node found");
@@ -46,5 +47,5 @@ export function isValid(tree: Tree): boolean {
   return true;
 }
 export function tree_nodes(tree: Tree): Node[] {
-  return Array.from(tree.edges.keys());
+  return Array.from(tree.keys());
 }
