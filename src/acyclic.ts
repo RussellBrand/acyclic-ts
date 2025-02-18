@@ -98,3 +98,34 @@ export function simple_delete_node(tree: Tree, node: Node): void {
   // throw "Not implemented";
   //   tree.delete(node);
 }
+
+export function add_node(
+  tree: Tree,
+  node: Node,
+  my_parent: Node | undefined = undefined
+): void {
+  const my_root = root(tree);
+  if (my_parent === undefined) {
+    my_parent = my_root;
+  }
+  if (node === my_root) {
+    throw new Error("Cannot add root node");
+  }
+  if (node === my_parent) {
+    throw new Error("Child and parent must be distinct");
+  }
+  if (!has_node(tree, my_parent)) {
+    throw new Error("the parent must already be in the tree");
+  }
+
+  // 4. a new child can always be added anywhere
+  // 5. an pre-existing edge is always ok
+  // 6. a new edge for an exist child must be validated
+
+  throw new Error("Not implemented");
+
+  //   if (tree.has(node)) {
+  //     return;
+  //   }
+  //   tree.set(node, []);
+}

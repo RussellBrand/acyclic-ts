@@ -37,6 +37,7 @@ semantics:if the parent isn't provided, make the parent the root
 1. the child must not be root
 2. the child and parent must be distinct
 3. the parent must already exist
+
 4. a new child can always be added anywhere
 5. an pre-existing edge is always ok
 6. a new edge for an exist child must be validated
@@ -123,4 +124,5 @@ semantics: if `old` is undefined, the child must have exactly pre-existing paren
 ### can remove a node whose children all have other parents
 
 
+### look at the exception types & messages
 ### make the order of arguments consistant

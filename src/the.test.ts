@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import {
+  add_node,
   // children,
   has_node,
   make_tree,
@@ -69,6 +70,24 @@ describe("Tree test suite", () => {
       expect(has_node(ROOT_ABC_TREE, "C")).toBe(true);
       simple_delete_node(ROOT_ABC_TREE, "C");
       expect(has_node(ROOT_ABC_TREE, "C")).toBe(false);
+    });
+  });
+  describe("add_node function", () => {
+    it("cannot add a root node", () => {
+      expect(() => add_node(SINGELON_TREE, ROOT)).toThrow(
+        "Cannot add root node"
+      );
+      expect(has_node(SINGELON_TREE, ROOT)).toBe(true);
+    });
+    it("child and parent must be distinct", () => {
+      expect(() => add_node(ROOT_ABC_TREE, "b", "b")).toThrow(
+        "Child and parent must be distinct"
+      );
+    });
+    it("the parent must already be in the tree", () => {
+      expect(() => add_node(ROOT_ABC_TREE, "b", "not-real")).toThrow(
+        "the parent must already be in the tree"
+      );
     });
   });
 });
