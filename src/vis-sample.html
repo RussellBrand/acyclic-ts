@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parent-Child Graph</title>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      #network {
+        width: 100%;
+        height: 500px;
+        border: 1px solid lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Parent-Child Relationship Graph</h2>
+    <div id="network"></div>
+
+    <script>
+      // Sample Data (each child can have multiple parents)
+      const relationships = [
+        { parent: "A", child: "B" },
+        { parent: "A", child: "C" },
+        { parent: "A", child: "F" },
+        { parent: "B", child: "D" },
+        { parent: "C", child: "D" },
+        { parent: "C", child: "E" },
+        { parent: "D", child: "F" },
+        { parent: "E", child: "F" },
+      ];
+
+      // Extract unique nodes first
+      const nodesSet = new Set();
+      relationships.forEach((rel) => {
+        nodesSet.add(rel.parent);
+        nodesSet.add(rel.child);
+      });
+
+      // Calculate levels for each node
+      const levels = {};
+      const visited = new Set();
+
+      function calculateLevels(nodeName, level = 0) {
+        if (!levels[nodeName] || level > levels[nodeName]) {
+          levels[nodeName] = level;
+        }
+        visited.add(nodeName);
+
+        relationships.forEach((rel) => {
+          if (rel.parent === nodeName && !visited.has(rel.child)) {
+            calculateLevels(rel.child, level + 1);
+          }
+        });
+      }
+
+      // Find root nodes (nodes that are never children)
+      const childNodes = new Set(relationships.map((r) => r.child));
+      const rootNodes = Array.from(nodesSet).filter(
+        (node) => !childNodes.has(node)
+      );
+
+      // Calculate levels starting from each root
+      rootNodes.forEach((root) => calculateLevels(root));
+
+      // Create nodes array with y-positions
+      const nodes = Array.from(nodesSet).map((name) => ({
+        id: name,
+        label: name,
+        y: levels[name] * 100, // Multiply by 100 to space out levels
+        fixed: {
+          y: true,
+        },
+      }));
+
+      // Create edges array
+      const edges = relationships.map((rel) => ({
+        from: rel.parent,
+        to: rel.child,
+      }));
+
+      // Create a network
+      const container = document.getElementById("network");
+      const data = {
+        nodes: new vis.DataSet(nodes),
+        edges: new vis.DataSet(edges),
+      };
+      const options = {
+        layout: {
+          hierarchical: { enabled: false }, // Disable automatic hierarchical layout
+        },
+        edges: { arrows: "to" },
+        physics: {
+          enabled: true,
+          hierarchicalRepulsion: {
+            nodeDistance: 100,
+          },
+        },
+      };
+
+      new vis.Network(container, data, options);
+    </script>
+  </body>
+</html>

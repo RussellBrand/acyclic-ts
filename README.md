@@ -35,5 +35,13 @@ things we *might* do
 
 
 ## Step 2: Display tree in react
+### draw simple parent-child heiarchies by hand
+Perhaps use factorization as an example
+### look for pre-existing libraries
+#### Vis
+Sample code: `src/vis-sample.html`
+#### D3 
+Sample code: `src/d3-sample.html`
+
 ## Step 3: Store tree in mongodb
 ## Step 4: Edit tree in react
