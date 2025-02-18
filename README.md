@@ -2,7 +2,7 @@
 
 aCyclic is package for manipulating acylic graph graphs with a single root (trees).
 
-## Step 1: Basic Library
+## Step 1: Basic Library for Aclyclic Trees
 
 We are first building a basic library in typescript.
 
@@ -32,7 +32,7 @@ These tests are not expect to surive changes in represenation
 
 things we _might_ do
 
-## Step 2: Display tree in react
+## Step 2: Display general directed graph in react
 
 ### draw simple parent-child heiarchies by hand
 
@@ -90,6 +90,12 @@ Developed by Airbnb, Visx combines the power of D3.js with the benefits of React
 
 Nivo provides a rich set of data visualization components built on top of D3.js and React. It includes support for various graph types and is known for its flexibility and ease of use, making it suitable for visualizing complex hierarchical data.
 
-## Step 3: Store tree in mongodb
-
-## Step 4: Edit tree in react
+## Step 3: Figure semantics and other fields
+## Step 3: Display for other fields
+## Step 5: simple CRUD for general directed graph in mongodb
+## Step 6: business logic in back end
+## Step 7: Edit general directed graph in react
+Constraints are more complex than acyclic tree
+## Step 8: for undo/redo 
+Journaling backend 
+ui for journaling
