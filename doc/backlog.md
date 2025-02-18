@@ -1,10 +1,5 @@
 # backlog
-
 ## soon
-
-
-
-
 ### copy tree
 
 
@@ -34,12 +29,6 @@ edges.forEach((list, key) => {
 Object.freeze(edges); // Freeze the map itself
 
 ``` 
-### make a function `simple_delete_node(child)`
-1. child must not be root
-2. is idiom potent -- can delete notes that don't pre-exist
-
-3. child must not have children
-4. child is no longer in nodes
 
 ### make a function `add_node(child,parent?)`
 
@@ -88,6 +77,22 @@ semantics: if `old` is undefined, the child must have exactly pre-existing paren
 2. make sure root is put in the map first, so we can just iterate over notes to start with root
 ### refactor so that Tree is a Map rather than containing a map 
 
+### make a function `simple_delete_node(child)`
+1. child must not be root
+2. is idiom potent -- can delete notes that don't pre-exist
+3. child must not have children
+4. check child is no longer in nodes
+
+
+## elisp
+
+(custom-set-faces
+ '(markdown-header-face-1 ((t (:foreground "red" :weight bold :height 1.4))))
+  '(markdown-header-face-2 ((t (:foreground "orange" :weight bold :height 1.3
+  ))))
+    '(markdown-header-face-3 ((t (:foreground "yellow" :weight bold :height 1.1
+  ))))
+ )
 ## inbox
 ### probably get rid of make tree entirely
 ### refresh trees at the beginning of each node
@@ -117,3 +122,5 @@ semantics: if `old` is undefined, the child must have exactly pre-existing paren
 ### can remove a node that has no children 
 ### can remove a node whose children all have other parents
 
+
+### make the order of arguments consistant

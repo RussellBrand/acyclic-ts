@@ -22,6 +22,10 @@ export function parents(node: Node, tree: Tree): Node[] {
   return parents;
 }
 
+export function children(node: Node, tree: Tree): Node[] {
+  return tree.get(node) || [];
+}
+
 /***
  * make_tree does no validation of the input. It is the responsibility of the caller to ensure that the input is valid.
  * ***/
@@ -70,17 +74,27 @@ export function tree_nodes(tree: Tree): Node[] {
   return Array.from(tree.keys());
 }
 
+export function has_node(tree: Tree, node: Node): boolean {
+  return tree.has(node);
+}
+
 export function simple_delete_node(tree: Tree, node: Node): void {
+  console.log(tree);
+  console.log(node);
   if (node === root(tree)) {
     throw new Error("Cannot delete root node");
   }
   if (!tree.has(node)) {
     return;
   }
-  const children = tree.get(node);
-  if (children) {
+  const my_children = children(node, tree);
+  console.log(tree);
+  console.log(node);
+  console.log(my_children);
+  if (my_children.length > 0) {
     throw new Error("Cannot delete node with children");
   }
-  throw "Not implemented";
+  tree.delete(node);
+  // throw "Not implemented";
   //   tree.delete(node);
 }

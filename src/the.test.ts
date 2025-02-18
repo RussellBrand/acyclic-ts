@@ -1,5 +1,12 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { make_tree, root, simple_delete_node, Tree } from "./acyclic";
+import {
+  // children,
+  has_node,
+  make_tree,
+  root,
+  simple_delete_node,
+  Tree,
+} from "./acyclic";
 import { isValid } from "./acyclic";
 
 const ROOT = "root";
@@ -40,6 +47,7 @@ describe("Tree test suite", () => {
       expect(() => simple_delete_node(SINGELON_TREE, ROOT)).toThrow(
         "Cannot delete root node"
       );
+      expect(has_node(SINGELON_TREE, ROOT)).toBe(true);
     });
     it("is permitted to delete non-existent nodes", () => {
       expect(() =>
@@ -50,9 +58,17 @@ describe("Tree test suite", () => {
       expect(() => simple_delete_node(ROOT_ABC_TREE, "A")).toThrow(
         "Cannot delete node with children"
       );
+
+      expect(has_node(ROOT_ABC_TREE, "A")).toBe(true);
       expect(() => simple_delete_node(ROOT_ABC_TREE, "B")).toThrow(
         "Cannot delete node with children"
       );
+      expect(has_node(ROOT_ABC_TREE, "A")).toBe(true);
+    });
+    it("deletes nodes without children", () => {
+      expect(has_node(ROOT_ABC_TREE, "C")).toBe(true);
+      simple_delete_node(ROOT_ABC_TREE, "C");
+      expect(has_node(ROOT_ABC_TREE, "C")).toBe(false);
     });
   });
 });
