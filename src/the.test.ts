@@ -73,7 +73,8 @@ describe("Tree test suite", () => {
     });
   });
   describe("add_node function", () => {
-    it("cannot add a root node", () => {
+    // TODO: should validate that "throws" don't alter the tree
+    it("refuse to add a root node", () => {
       expect(() => add_node(SINGELON_TREE, ROOT)).toThrow(
         "Cannot add root node"
       );
