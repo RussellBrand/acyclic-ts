@@ -12,18 +12,18 @@ export function edge_group_children(edge_group: EdgeGroup): NodeName[] {
   return children;
 }
 
-export function parents(node: NodeName, tree: Tree): NodeName[] {
+export function parents(node_name: NodeName, tree: Tree): NodeName[] {
   const parents = [];
   for (const [parent, children] of tree) {
-    if (children.includes(node)) {
+    if (children.includes(node_name)) {
       parents.push(parent);
     }
   }
   return parents;
 }
 
-export function children(node: NodeName, tree: Tree): NodeName[] {
-  return tree.get(node) || [];
+export function children(node_name: NodeName, tree: Tree): NodeName[] {
+  return tree.get(node_name) || [];
 }
 
 /***
@@ -35,9 +35,9 @@ export function make_tree(
 ): Tree {
   const edges = new Map<NodeName, NodeName[]>();
   //   edges.set(root, []);
-  for (const node of nodes) {
-    if (!edges.has(node)) {
-      edges.set(node, []);
+  for (const node_name of nodes) {
+    if (!edges.has(node_name)) {
+      edges.set(node_name, []);
     }
   }
 
@@ -52,8 +52,8 @@ export function make_tree(
 }
 
 export function root(tree: Tree): NodeName {
-  for (const [node, _] of tree) {
-    return node;
+  for (const [node_name, _] of tree) {
+    return node_name;
   }
   throw new Error("No root node found");
 }
@@ -63,8 +63,8 @@ export function isValid(tree: Tree): boolean {
     return false;
   }
   const [root, _] = tree;
-  const [root_node, _children_of_root] = root;
-  if (parents(root_node, tree).length !== 0) {
+  const [root_node_name, _children_of_root] = root;
+  if (parents(root_node_name, tree).length !== 0) {
     return false;
   }
 
@@ -74,44 +74,44 @@ export function tree_nodes(tree: Tree): NodeName[] {
   return Array.from(tree.keys());
 }
 
-export function has_node(tree: Tree, node: NodeName): boolean {
-  return tree.has(node);
+export function has_node(tree: Tree, node_name: NodeName): boolean {
+  return tree.has(node_name);
 }
 
-export function simple_delete_node(tree: Tree, node: NodeName): void {
+export function simple_delete_node(tree: Tree, node_name: NodeName): void {
   // console.log(tree);
   // console.log(node);
-  if (node === root(tree)) {
+  if (node_name === root(tree)) {
     throw new Error("Cannot delete root node");
   }
-  if (!tree.has(node)) {
+  if (!tree.has(node_name)) {
     return;
   }
-  const my_children = children(node, tree);
+  const my_children = children(node_name, tree);
   // console.log(tree);
   // console.log(node);
   // console.log(my_children);
   if (my_children.length > 0) {
     throw new Error("Cannot delete node with children");
   }
-  tree.delete(node);
+  tree.delete(node_name);
   // throw "Not implemented";
   //   tree.delete(node);
 }
 
 export function add_node(
   tree: Tree,
-  node: NodeName,
+  node_name: NodeName,
   my_parent: NodeName | undefined = undefined
 ): void {
   const my_root = root(tree);
   if (my_parent === undefined) {
     my_parent = my_root;
   }
-  if (node === my_root) {
+  if (node_name === my_root) {
     throw new Error("Cannot add root node");
   }
-  if (node === my_parent) {
+  if (node_name === my_parent) {
     throw new Error("Child and parent must be distinct");
   }
   if (!has_node(tree, my_parent)) {
