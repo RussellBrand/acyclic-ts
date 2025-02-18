@@ -1,6 +1,13 @@
 # backlog
 
+## freeze tree
+## copy tree
+## refresh trees at the beginning of each node
+
 ## we get back the nodes we added 
+
+make a function `add(child,parent?)`
+
 ## adding nodes is idiompotent -- we can add a node more than onces
 ## we get back the edges we added 
 ## adding edges is idiompotent -- we can add an edge more than onces
