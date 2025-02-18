@@ -79,8 +79,8 @@ export function has_node(tree: Tree, node: Node): boolean {
 }
 
 export function simple_delete_node(tree: Tree, node: Node): void {
-  console.log(tree);
-  console.log(node);
+  // console.log(tree);
+  // console.log(node);
   if (node === root(tree)) {
     throw new Error("Cannot delete root node");
   }
@@ -88,9 +88,9 @@ export function simple_delete_node(tree: Tree, node: Node): void {
     return;
   }
   const my_children = children(node, tree);
-  console.log(tree);
-  console.log(node);
-  console.log(my_children);
+  // console.log(tree);
+  // console.log(node);
+  // console.log(my_children);
   if (my_children.length > 0) {
     throw new Error("Cannot delete node with children");
   }
