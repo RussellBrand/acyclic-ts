@@ -4,12 +4,7 @@
  */
 export type Node = string;
 
-// export type Edges = Map<Node, Node[]>;
 export type Tree = Map<Node, Node[]>;
-
-// export type Tree = {
-//   edges: Edges; // potentially confusing that edges.size is the number of nodes in the graph, not the number of edges
-// };
 
 /***
  * make_tree does no validation of the input. It is the responsibility of the caller to ensure that the input is valid.

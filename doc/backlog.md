@@ -1,13 +1,14 @@
 # backlog
 
 ## soon
-### refactor so that Tree is a Map rather than containing a map 
-### rename `make_tree` -> `make_tree_from_arrays`
-### create `make_tree_from_root_and_array`
 
 
-### seperate `all_nodes` and `nodes_starting_with_root`
+
+
 ### copy tree
+
+
+
 ```
 const copyEdges = new Map();
 
@@ -19,7 +20,8 @@ edges.forEach((list, key) => {
 ```
 
 1. copy has same stuff
-2. changing one doesn't change the other
+2. changing one doesn't change the other -- add nodes
+3. changing one doesn't change the other -- add edge
 
 
 
@@ -38,7 +40,7 @@ Object.freeze(edges); // Freeze the map itself
 3. child must not have children
 4. child is no longer in nodes
 
-### make a function `add(child,parent?)`
+### make a function `add_node(child,parent?)`
 
 semantics:if the parent isn't provided, make the parent the root
 
@@ -76,13 +78,17 @@ semantics: if `old` is undefined, the child must have exactly pre-existing paren
 
 
 ## defer
+### seperate `all_nodes` and `nodes_starting_with_root`
+### rename `make_tree` -> `make_tree_from_arrays`
+### create `make_tree_from_root_and_array`
 ## done
 ### refactor to get rid of the nodes attribute
 1. in `make_tree` loop over nodes and insert into the map if they are not already there
 2. make sure root is put in the map first, so we can just iterate over notes to start with root
+### refactor so that Tree is a Map rather than containing a map 
 
 ## inbox
-### freeze tree
+### probably get rid of make tree entirely
 ### refresh trees at the beginning of each node
 
 

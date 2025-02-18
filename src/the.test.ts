@@ -1,22 +1,18 @@
-import {
-  describe,
-  it,
-  expect,
-  // , beforeEach
-} from "vitest";
-import { make_tree, root } from "./acyclic";
+import { describe, it, expect, beforeEach } from "vitest";
+import { make_tree, root, Tree } from "./acyclic";
 import { isValid } from "./acyclic";
 
 const ROOT = "root";
-const INVALID_EMPTY_TREE = make_tree([], []);
-const SINGELON_TREE = make_tree([ROOT], []);
+let INVALID_EMPTY_TREE: Tree;
+let SINGELON_TREE: Tree;
 
 // let alice = 1;
 
 describe("Tree test suite", () => {
-  //   beforeEach(() => {
-  //     //  reset the trees to make they are good
-  //   });
+  beforeEach(() => {
+    INVALID_EMPTY_TREE = make_tree([], []);
+    SINGELON_TREE = make_tree([ROOT], []);
+  });
   describe("isValid function", () => {
     it("trees with just a root node are valid", () => {
       expect(isValid(SINGELON_TREE)).toBe(true);
