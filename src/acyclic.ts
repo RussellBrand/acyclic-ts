@@ -7,9 +7,7 @@ export type Node = string;
 export type Edges = Map<Node, Node[]>;
 
 export type Tree = {
-  root: Node;
-  nodes: Set<Node>;
-  edges: Edges;
+  edges: Edges; // potentially confusing that edges.size is the number of nodes in the graph, not the number of edges
 };
 
 /***
@@ -18,6 +16,12 @@ export type Tree = {
 export function make_tree(nodes: Node[], connections: [Node, Node][]): Tree {
   const edges = new Map<Node, Node[]>();
 
+  for (const node of nodes) {
+    if (!edges.has(node)) {
+      edges.set(node, []);
+    }
+  }
+
   for (const [from, to] of connections) {
     if (!edges.has(from)) {
       edges.set(from, []);
@@ -25,13 +29,22 @@ export function make_tree(nodes: Node[], connections: [Node, Node][]): Tree {
     edges.get(from)?.push(to);
   }
 
-  const nodesSet = new Set(nodes);
-  return { root: nodes[0], nodes: nodesSet, edges };
+  return { edges };
+}
+
+export function root(tree: Tree): Node {
+  for (const [node, _] of tree.edges) {
+    return node;
+  }
+  throw new Error("No root node found");
 }
 
 export function isValid(tree: Tree): boolean {
-  if (tree.nodes.size === 0) {
+  if (tree_nodes(tree).length === 0) {
     return false;
   }
   return true;
+}
+export function tree_nodes(tree: Tree): Node[] {
+  return Array.from(tree.edges.keys());
 }

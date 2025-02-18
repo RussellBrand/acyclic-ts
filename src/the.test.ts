@@ -4,7 +4,7 @@ import {
   expect,
   // , beforeEach
 } from "vitest";
-import { make_tree } from "./acyclic";
+import { make_tree, root } from "./acyclic";
 import { isValid } from "./acyclic";
 
 const ROOT = "root";
@@ -20,7 +20,7 @@ describe("Tree test suite", () => {
   describe("isValid function", () => {
     it("trees with just a root node are valid", () => {
       expect(isValid(SINGELON_TREE)).toBe(true);
-      expect(SINGELON_TREE.root).toBe(ROOT);
+      expect(root(SINGELON_TREE)).toBe(ROOT);
     });
 
     it("trees must have root nodes", () => {
